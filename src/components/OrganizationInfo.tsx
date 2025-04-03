@@ -18,17 +18,17 @@ export function OrganizationInfo({ cause, isOpen, onOpenChange }: OrganizationIn
         <div className="px-6 space-y-6">
           <div>
             <h3 className="font-medium text-lg text-muted-foreground mb-2">Mission</h3>
-            <p className="text-xl">{cause.mission}</p>
+            <p className="text-lg">{cause.mission}</p>
           </div>
 
           <div>
             <h3 className="font-medium text-lg text-muted-foreground mb-2">Impact</h3>
-            <p className="text-xl">{cause.impact}</p>
+            <p className="text-lg">{cause.impact}</p>
           </div>
 
           <div>
             <h3 className="font-medium text-lg text-muted-foreground mb-2">How Your Donation Helps</h3>
-            <p className="text-xl">{cause.use}</p>
+            <p className="text-lg">{cause.use}</p>
           </div>
 
           <div className="pt-2">
