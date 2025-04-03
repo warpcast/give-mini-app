@@ -7,10 +7,10 @@
   "frame": {
     "version": "1",
     "name": "Give",
-    "imageUrl": "https://placehold.co/900x600.png?text=Myanmar%20Earthquake%20Relief",
+    "imageUrl": "https://give-frame.vercel.app/embed.png",
     "buttonTitle": "Give",
-    "iconUrl": "https://placehold.co/250x250.png?text=Icon",
-    "splashImageUrl": "https://placehold.co/250x250.png?text=Splash",
+    "iconUrl": "https://give-frame.vercel.app/icon.png",
+    "splashImageUrl": "https://give-frame.vercel.app/splash.png",
     "splashBackgroundColor": "#ffffff",
     "homeUrl": "https://give-frame.vercel.app/"
   }

@@ -5,7 +5,6 @@ import { DonateButton } from "./components/DonateButton";
 import { OrganizationHeader } from "./components/OrganizationHeader";
 import { OrganizationInfo } from "./components/OrganizationInfo";
 import { ShareDrawer } from "./components/ShareDrawer";
-import { Button } from "./components/ui/button";
 import { CAUSES } from "./lib/causes";
 
 const ACTIVE_CAUSE = CAUSES["myanmar-relief"];
@@ -15,7 +14,6 @@ function App() {
   const [infoDrawerOpen, setInfoDrawerOpen] = useState(false);
   const [shareDrawerOpen, setShareDrawerOpen] = useState(false);
   const [donationComplete, setDonationComplete] = useState(false);
-  const [testMode, setTestMode] = useState(false);
   const [isContextLoading, setIsContextLoading] = useState(true);
   const [userData, setUserData] = useState<{ fid?: string; username?: string }>({});
 
@@ -41,26 +39,6 @@ function App() {
 
     initializeContext();
   }, []);
-
-  // Test mode effect - simulates payment completion after a short delay
-  useEffect(() => {
-    let timer: number | undefined;
-
-    if (testMode) {
-      timer = window.setTimeout(() => {
-        // Use the same handler as the real flow
-        handlePaymentComplete();
-      }, 1000);
-    }
-
-    return () => {
-      if (timer) {
-        window.clearTimeout(timer);
-      }
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [testMode]);
-
   const openInfoDrawer = () => setInfoDrawerOpen(true);
   const handleAmountChange = (value: string) => {
     setAmount(value || "0");
@@ -84,7 +62,6 @@ function App() {
   const handleShareComplete = () => {
     setShareDrawerOpen(false);
     setDonationComplete(false);
-    setTestMode(false);
   };
 
   return (
@@ -111,19 +88,6 @@ function App() {
           metadata={userData}
           isLoading={isContextLoading}
         />
-      </div>
-
-      {/* Test button - only for development testing */}
-      <div className="w-full mb-2">
-        <Button
-          onClick={() => setTestMode(true)}
-          variant="outline"
-          size="sm"
-          className="w-full text-xs"
-          disabled={testMode || donationComplete || isContextLoading}
-        >
-          Test donation flow
-        </Button>
       </div>
 
       <OrganizationInfo cause={ACTIVE_CAUSE} isOpen={infoDrawerOpen} onOpenChange={setInfoDrawerOpen} />
