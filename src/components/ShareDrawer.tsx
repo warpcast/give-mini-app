@@ -23,9 +23,7 @@ export function ShareDrawer({ cause, isOpen, onOpenChange, onComplete }: ShareDr
       <DrawerContent className="px-0 pb-16">
         <div className="px-6 space-y-6">
           <div className="flex flex-col items-center justify-center py-8">
-            <p className="text-lg text-center mb-2">
-              Share with your followers and inspire others to support this cause.
-            </p>
+            <p className="text-lg text-center mb-2">Inspire others to support this cause!</p>
             <p className="text-sm text-muted-foreground text-center mb-6 italic">"{getShareText(cause)}"</p>
             <Button
               onClick={handleShareClick}

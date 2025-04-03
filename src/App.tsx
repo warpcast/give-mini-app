@@ -47,21 +47,9 @@ function App() {
     let timer: number | undefined;
 
     if (testMode) {
-      timer = window.setTimeout(async () => {
-        // Simulate the payment completion
-        setDonationComplete(true);
-
-        // Actually call the addFrame method
-        try {
-          // Prompt user to add frame using native drawer, just like in real flow
-          await sdk.actions.addFrame();
-          // After add drawer is dismissed, show share drawer
-          setShareDrawerOpen(true);
-        } catch (error) {
-          console.error("Error adding frame in test mode:", error);
-          // Show share drawer even if add frame fails
-          setShareDrawerOpen(true);
-        }
+      timer = window.setTimeout(() => {
+        // Use the same handler as the real flow
+        handlePaymentComplete();
       }, 1000);
     }
 
@@ -70,14 +58,15 @@ function App() {
         window.clearTimeout(timer);
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [testMode]);
 
+  const openInfoDrawer = () => setInfoDrawerOpen(true);
   const handleAmountChange = (value: string) => {
     setAmount(value || "0");
   };
 
-  const openInfoDrawer = () => setInfoDrawerOpen(true);
-
+  // Define handler for completing payment and starting add/share flow
   const handlePaymentComplete = async () => {
     setDonationComplete(true);
     try {
