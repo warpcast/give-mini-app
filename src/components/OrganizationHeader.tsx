@@ -8,11 +8,9 @@ interface OrganizationHeaderProps {
 export function OrganizationHeader({ cause, onInfoClick }: OrganizationHeaderProps) {
   return (
     <div className="w-full mb-4">
-      {/* Header Image with Overlay */}
       <div className="relative w-full h-[325px] overflow-hidden">
         {cause.image && <img src={cause.image} alt={`${cause.name} banner`} className="w-full h-full object-cover" />}
 
-        {/* Overlay with CSS gradient mask for smooth blur transition */}
         <div
           className="absolute bottom-0 left-0 right-0 w-full h-[180px]"
           style={{
@@ -24,16 +22,15 @@ export function OrganizationHeader({ cause, onInfoClick }: OrganizationHeaderPro
           }}
         />
 
-        {/* Text Overlay Button */}
         <button
           type="button"
           className="absolute bottom-0 left-0 right-0 w-full px-4 py-4 text-left focus:outline-none cursor-pointer z-10"
           onClick={onInfoClick}
           aria-label={`View more information about ${cause.name}`}
         >
-          <div className="flex items-start gap-2 relative z-10">
+          <div className="flex items-start relative z-10">
             {cause.logo && (
-              <img src={cause.logo} alt={`${cause.name} logo`} className="w-[34px] h-[34px] object-contain mt-1" />
+              <img src={cause.logo} alt={`${cause.name} logo`} className="w-[34px] h-[34px] object-contain" />
             )}
             <div>
               <h2 className="text-2xl font-semibold tracking-tight text-white">{cause.name}</h2>
