@@ -7,7 +7,7 @@
   "frame": {
     "version": "1",
     "name": "Give",
-    "imageUrl": "https://give-frame.vercel.app/embed.png",
+    "imageUrl": "https://give-frame.vercel.app/frame.png",
     "buttonTitle": "Give",
     "iconUrl": "https://give-frame.vercel.app/icon.png",
     "splashImageUrl": "https://give-frame.vercel.app/splash.png",

@@ -44,17 +44,13 @@ function App() {
     setAmount(value || "0");
   };
 
-  // Define handler for completing payment and starting add/share flow
   const handlePaymentComplete = async () => {
     setDonationComplete(true);
     try {
-      // Prompt user to add frame, which triggers native drawer
       await sdk.actions.addFrame();
-      // After add drawer is dismissed, show share drawer
       setShareDrawerOpen(true);
     } catch (error) {
       console.error("Error adding frame:", error);
-      // Show share drawer even if add frame fails
       setShareDrawerOpen(true);
     }
   };
@@ -65,21 +61,16 @@ function App() {
   };
 
   return (
-    <div className="w-full max-w-sm mx-auto px-4 py-6 flex flex-col min-h-[100vh]">
-      <div className="mb-6 w-full">
-        <OrganizationHeader cause={ACTIVE_CAUSE} onInfoClick={openInfoDrawer} />
-      </div>
+    <div className="w-full max-w-sm mx-auto px-0 flex flex-col min-h-[100vh]">
+      <OrganizationHeader cause={ACTIVE_CAUSE} onInfoClick={openInfoDrawer} />
 
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col px-4">
         <div className="flex items-start justify-center">
           <AmountPicker onChange={handleAmountChange} defaultAmount="1" />
         </div>
-        <div className="text-center text-muted-foreground text-base py-4 border-t border-border">
-          {ACTIVE_CAUSE.donationDescription}
-        </div>
       </div>
 
-      <div className="w-full mb-4">
+      <div className="w-full px-4 mb-2">
         <DonateButton
           amount={amount}
           walletAddress={ACTIVE_CAUSE.wallet}
@@ -89,6 +80,8 @@ function App() {
           isLoading={isContextLoading}
         />
       </div>
+
+      <div className="text-center text-xs pb-8 pt-3 text-text-caption">{ACTIVE_CAUSE.donationNote}</div>
 
       <OrganizationInfo cause={ACTIVE_CAUSE} isOpen={infoDrawerOpen} onOpenChange={setInfoDrawerOpen} />
 

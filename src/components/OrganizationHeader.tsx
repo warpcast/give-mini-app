@@ -7,35 +7,60 @@ interface OrganizationHeaderProps {
 
 export function OrganizationHeader({ cause, onInfoClick }: OrganizationHeaderProps) {
   return (
-    <button
-      type="button"
-      className="w-full border-b border-border py-4 px-0 flex items-center justify-between text-left focus:outline-none cursor-pointer"
-      onClick={onInfoClick}
-      aria-label={`View more information about ${cause.name}`}
-    >
-      <div className="flex items-center gap-2">
-        <div>
-          <h2 className="text-2xl font-semibold tracking-tight">{cause.name}</h2>
-          <p className="text-base text-muted-foreground">{cause.shortDescription}</p>
-        </div>
+    <div className="w-full mb-4">
+      {/* Header Image with Overlay */}
+      <div className="relative w-full h-[325px] overflow-hidden">
+        {cause.image && <img src={cause.image} alt={`${cause.name} banner`} className="w-full h-full object-cover" />}
+
+        {/* Overlay with CSS gradient mask for smooth blur transition */}
+        <div
+          className="absolute bottom-0 left-0 right-0 w-full h-[180px]"
+          style={{
+            background: "linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0))",
+            maskImage: "linear-gradient(to top, black 20%, transparent 85%)",
+            WebkitMaskImage: "linear-gradient(to top, black 20%, transparent 85%)",
+            backdropFilter: "blur(20px)",
+            WebkitBackdropFilter: "blur(20px)",
+          }}
+        />
+
+        {/* Text Overlay Button */}
+        <button
+          type="button"
+          className="absolute bottom-0 left-0 right-0 w-full px-4 py-4 text-left focus:outline-none cursor-pointer z-10"
+          onClick={onInfoClick}
+          aria-label={`View more information about ${cause.name}`}
+        >
+          <div className="flex items-start gap-2 relative z-10">
+            {cause.logo && (
+              <img src={cause.logo} alt={`${cause.name} logo`} className="w-[34px] h-[34px] object-contain mt-1" />
+            )}
+            <div>
+              <h2 className="text-2xl font-semibold tracking-tight text-white">{cause.name}</h2>
+              <div className="flex items-center gap-1">
+                <p className="text-base text-white/75 font-light">{cause.shortDescription}</p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="text-white/60 ml-1"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 16v-4" />
+                  <path d="M12 8h.01" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </button>
       </div>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="text-muted-foreground"
-        aria-hidden="true"
-      >
-        <circle cx="12" cy="12" r="10" />
-        <path d="M12 16v-4" />
-        <path d="M12 8h.01" />
-      </svg>
-    </button>
+    </div>
   );
 }

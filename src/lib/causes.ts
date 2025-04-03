@@ -13,5 +13,8 @@ export const CAUSES: CauseCollection = {
     website: "https://quake.myanmarblockchainrelief.org/",
     wallet: "0xa52820d251b38d6e3bd5739f4fd6fa32e7d125f3",
     shareText: "I just donated to help earthquake victims in Myanmar. Join me to support urgent relief efforts.",
+    image: "/causes/myanmar-relief/image.png",
+    logo: "/causes/myanmar-relief/logo.png",
+    donationNote: "100% of donations go to rescue and relief efforts in Myanmar",
   },
 };

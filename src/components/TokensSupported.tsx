@@ -57,7 +57,7 @@ export function TokensSupported() {
           <ChainLogo alt="Polygon" color={CHAIN_COLORS.polygon} src="/chains/Polygon.webp" />
         </div>
       </div>
-      <span className="text-base text-muted-foreground">1000+ tokens accepted</span>
+      <span className="text-base text-text-body">1000+ tokens accepted</span>
     </div>
   );
 }

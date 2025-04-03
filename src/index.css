@@ -16,16 +16,24 @@
   --popover-foreground: #373737;
 
   /* Primary action colors */
-  --primary: #000000;
+  --primary: #6d59f6;
   --primary-foreground: #ffffff;
 
   /* Secondary UI colors */
-  --secondary: #f6f7f9;
-  --secondary-foreground: #000000;
+  --secondary: #f7f6fe;
+  --secondary-foreground: #6d59f6;
 
   /* Muted/subtle elements */
   --muted: #f6f7f9;
   --muted-foreground: #999999;
+
+  /* Additional text colors */
+  --text-body: #6e7375;
+  --text-subtitle: #546473;
+  --text-caption: #8b99a4;
+
+  /* Button styling */
+  --selected-border: #d4cdfb;
 
   /* Accent UI elements */
   --accent: #f6f7f9;
@@ -106,6 +114,10 @@
   --color-ring: var(--ring);
   --color-overlay: var(--overlay);
   --color-shadow-sm: var(--shadow-sm);
+  --color-text-body: var(--text-body);
+  --color-text-subtitle: var(--text-subtitle);
+  --color-text-caption: var(--text-caption);
+  --color-selected-border: var(--selected-border);
 }
 
 @layer base {
