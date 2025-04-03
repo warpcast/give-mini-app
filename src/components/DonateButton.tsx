@@ -40,6 +40,7 @@ export function DonateButton({
       onPaymentCompleted={handlePaymentCompleted}
       paymentOptions={[]}
       metadata={metadata}
+      closeOnSuccess
     >
       {({ show }) => {
         const amountNumber = Number(amount);

@@ -157,6 +157,14 @@ html,
 body {
   overflow: hidden;
   max-height: 100vh;
+  /* Disable pinch-zoom */
+  touch-action: pan-x pan-y;
+  -ms-touch-action: pan-x pan-y;
+}
+
+/* Disable zoom for the viewport */
+meta[name="viewport"] {
+  content: "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no";
 }
 
 h1,
