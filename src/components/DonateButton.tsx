@@ -31,7 +31,7 @@ export function DonateButton({
 
   return (
     <DaimoPayButton.Custom
-      appId="pay-demo"
+      appId="pay-merkle-EfzUe9g9k32MWgNzdWzYZW"
       intent="Give"
       toChain={baseUSDC.chainId}
       toUnits={amount}
