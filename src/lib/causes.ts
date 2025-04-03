@@ -15,6 +15,6 @@ export const CAUSES: CauseCollection = {
     shareText: "I just donated to help earthquake victims in Myanmar. Join me to support urgent relief efforts.",
     image: "/causes/myanmar-relief/image.png",
     logo: "/causes/myanmar-relief/logo.png",
-    donationNote: "100% of donations go to rescue and relief efforts in Myanmar",
+    donationNote: "100% of donations go to rescue and relief efforts in Myanmar.",
   },
 };

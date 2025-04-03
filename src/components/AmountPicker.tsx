@@ -72,8 +72,8 @@ export function AmountPicker({ onChange, defaultAmount = "1", maxAmount = MAX_AM
 
   return (
     <div className="flex flex-col items-center w-full">
-      <div className="flex flex-col items-center py-6 mb-6" style={{ height: "140px" }}>
-        <div className="flex justify-center w-full h-[110px] items-center">
+      <div className="flex flex-col items-center py-2" style={{ minHeight: "100px", height: "min(140px, 15vh)" }}>
+        <div className="flex justify-center w-full items-center h-full">
           <div className="flex items-baseline" style={{ fontSize }}>
             <span className="font-medium relative z-10" style={{ marginRight: "0.12em" }}>
               $
@@ -94,13 +94,13 @@ export function AmountPicker({ onChange, defaultAmount = "1", maxAmount = MAX_AM
         </div>
       </div>
 
-      <div className="grid grid-cols-4 gap-3 w-full max-w-sm">
+      <div className="grid grid-cols-4 gap-3 w-full max-w-sm mb-2">
         {PRESET_AMOUNTS.map((preset) => (
           <Button
             key={preset.value}
             onClick={() => handleAmountSelect(preset.value)}
             variant="outline"
-            className={`h-14 text-base font-semibold rounded-2xl bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:text-secondary-foreground cursor-pointer ${
+            className={`h-12 text-base font-semibold rounded-2xl bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:text-secondary-foreground cursor-pointer ${
               amount === preset.value ? "border-2 border-selected-border" : "border-border"
             }`}
           >

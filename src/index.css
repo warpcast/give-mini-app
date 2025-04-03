@@ -141,6 +141,22 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: "ss01", "ss02", "ss03", "kern";
+
+  /* Disable scrollbars when in iframe */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+/* Disable scrollbars for WebKit browsers */
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Ensure content doesn't overflow */
+html,
+body {
+  overflow: hidden;
+  max-height: 100vh;
 }
 
 h1,

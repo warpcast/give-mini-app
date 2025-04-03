@@ -7,12 +7,12 @@ interface OrganizationHeaderProps {
 
 export function OrganizationHeader({ cause, onInfoClick }: OrganizationHeaderProps) {
   return (
-    <div className="w-full mb-4">
-      <div className="relative w-full h-[325px] overflow-hidden">
+    <div className="w-full mb-2">
+      <div className="relative w-full min-h-[250px] max-h-[325px] overflow-hidden">
         {cause.image && <img src={cause.image} alt={`${cause.name} banner`} className="w-full h-full object-cover" />}
 
         <div
-          className="absolute bottom-0 left-0 right-0 w-full h-[180px]"
+          className="absolute bottom-0 left-0 right-0 w-full h-[120px]"
           style={{
             background: "linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0))",
             maskImage: "linear-gradient(to top, black 20%, transparent 85%)",

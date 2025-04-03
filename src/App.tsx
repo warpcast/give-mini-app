@@ -61,27 +61,37 @@ function App() {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto px-0 flex flex-col min-h-[100vh]">
-      <OrganizationHeader cause={ACTIVE_CAUSE} onInfoClick={openInfoDrawer} />
+    <div className="w-full max-w-md mx-auto px-0 flex flex-col h-[100vh] relative">
+      {/* Main content area with auto height adjustment */}
+      <div className="flex flex-col w-full overflow-hidden" style={{ height: "calc(100% - 130px)" }}>
+        {/* Header with adjustable height */}
+        <div className="w-full overflow-hidden">
+          <OrganizationHeader cause={ACTIVE_CAUSE} onInfoClick={openInfoDrawer} />
+        </div>
 
-      <div className="flex-1 flex flex-col px-4">
-        <div className="flex items-start justify-center">
-          <AmountPicker onChange={handleAmountChange} defaultAmount="1" />
+        {/* Amount picker - will maintain its size */}
+        <div className="px-4 flex-shrink-0">
+          <div className="flex items-start justify-center">
+            <AmountPicker onChange={handleAmountChange} defaultAmount="1" />
+          </div>
         </div>
       </div>
 
-      <div className="w-full px-4 mb-2">
-        <DonateButton
-          amount={amount}
-          walletAddress={ACTIVE_CAUSE.wallet}
-          onPaymentComplete={handlePaymentComplete}
-          disabled={donationComplete || isContextLoading}
-          metadata={userData}
-          isLoading={isContextLoading}
-        />
-      </div>
+      {/* Fixed bottom area for CTA and note */}
+      <div className="fixed bottom-0 left-0 right-0 w-full bg-background pt-2 pb-8">
+        <div className="w-full px-4 mb-2 max-w-md mx-auto">
+          <DonateButton
+            amount={amount}
+            walletAddress={ACTIVE_CAUSE.wallet}
+            onPaymentComplete={handlePaymentComplete}
+            disabled={donationComplete || isContextLoading}
+            metadata={userData}
+            isLoading={isContextLoading}
+          />
+        </div>
 
-      <div className="text-center text-xs pb-8 pt-3 text-text-caption">{ACTIVE_CAUSE.donationNote}</div>
+        <div className="text-center text-xs pt-2 text-text-caption max-w-md mx-auto">{ACTIVE_CAUSE.donationNote}</div>
+      </div>
 
       <OrganizationInfo cause={ACTIVE_CAUSE} isOpen={infoDrawerOpen} onOpenChange={setInfoDrawerOpen} />
 
