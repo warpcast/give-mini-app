@@ -1,0 +1,17 @@
+{
+  "accountAssociation": {
+    "header": "eyJmaWQiOjkxNTIsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHgwMmVmNzkwRGQ3OTkzQTM1ZkQ4NDdDMDUzRURkQUU5NDBEMDU1NTk2In0",
+    "payload": "eyJkb21haW4iOiJtaW50LndhcnBjYXN0LmNvbSJ9",
+    "signature": "MHhjNzU3NDA0MWUyZDEwYWI3ZGI0MWExNWQ0ZTQ0MDFmOWRmMzkyMzhiMTVmMjFiODllNWI5NWJkNDY0N2IyZjMwMjkxNzJmNzJmOTgyNjJlNGUyZGNmMTMzMTVkYzZhMWQxYzM1ZDUxOGJiMTg2NWU2NzUxOGQyYTNlZDdkNTljMjFi"
+  },
+  "frame": {
+    "version": "1",
+    "name": "Give",
+    "imageUrl": "https://placehold.co/900x600.png?text=Myanmar%20Earthquake%20Relief",
+    "buttonTitle": "Give",
+    "iconUrl": "https://placehold.co/250x250.png?text=Icon",
+    "splashImageUrl": "https://placehold.co/250x250.png?text=Splash",
+    "splashBackgroundColor": "#ffffff",
+    "homeUrl": "https://give-frame.vercel.app/"
+  }
+}

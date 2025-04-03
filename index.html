@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Give</title>
+    <meta name="fc:frame" content='{
+      "version": "next",
+      "imageUrl": "https://placehold.co/900x600.png?text=Myanmar%20Earthquake%20Relief",
+      "button":{
+        "title": "Give",
+        "action": {
+          "type": "launch_frame",
+          "name": "Give",
+          "url": "https://give-frame.vercel.app"
+        }
+      }
+    }' />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
