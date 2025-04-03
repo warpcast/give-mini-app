@@ -12,5 +12,6 @@ export const CAUSES: CauseCollection = {
     use: "Your donation directly funds rescue and rebuilding efforts, with all payments transparently tracked onchain.",
     website: "https://quake.myanmarblockchainrelief.org/",
     wallet: "0xa52820d251b38d6e3bd5739f4fd6fa32e7d125f3",
+    shareText: "I just donated to help earthquake victims in Myanmar. Join me to support urgent relief efforts.",
   },
 };

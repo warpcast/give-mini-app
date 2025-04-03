@@ -8,15 +8,26 @@ interface DonateButtonProps {
   walletAddress: `0x${string}`;
   onPaymentComplete?: () => void;
   disabled?: boolean;
+  metadata?: Record<string, string>;
+  isLoading?: boolean;
 }
 
-export function DonateButton({ amount, walletAddress, onPaymentComplete, disabled }: DonateButtonProps) {
+export function DonateButton({
+  amount,
+  walletAddress,
+  onPaymentComplete,
+  disabled,
+  metadata = {},
+  isLoading = false,
+}: DonateButtonProps) {
   const handlePaymentCompleted = (e: unknown) => {
     console.log(e);
     if (onPaymentComplete) {
       onPaymentComplete();
     }
   };
+
+  const buttonText = isLoading ? "Loading..." : "Give";
 
   return (
     <DaimoPayButton.Custom
@@ -26,9 +37,9 @@ export function DonateButton({ amount, walletAddress, onPaymentComplete, disable
       toUnits={amount}
       toToken={getAddress(baseUSDC.token)}
       toAddress={walletAddress}
-      onPaymentBounced={(e) => console.log(e)}
       onPaymentCompleted={handlePaymentCompleted}
       paymentOptions={[]}
+      metadata={metadata}
     >
       {({ show }) => {
         const amountNumber = Number(amount);
@@ -41,7 +52,7 @@ export function DonateButton({ amount, walletAddress, onPaymentComplete, disable
             className="w-full h-14 text-lg font-semibold tracking-tight rounded-2xl bg-primary hover:bg-primary/90 cursor-pointer"
             disabled={isDisabled}
           >
-            Give
+            {buttonText}
           </Button>
         );
       }}

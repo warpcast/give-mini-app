@@ -8,6 +8,7 @@ export interface Cause {
   use: string;
   website?: string;
   wallet: `0x${string}`;
+  shareText?: string;
 }
 
 export type CauseCollection = Record<string, Cause>;

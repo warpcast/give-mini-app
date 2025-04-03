@@ -1,6 +1,5 @@
 import { sdk } from "@farcaster/frame-sdk";
 import { useEffect, useState } from "react";
-import { AddDrawer } from "./components/AddDrawer";
 import { AmountPicker } from "./components/AmountPicker";
 import { DonateButton } from "./components/DonateButton";
 import { OrganizationHeader } from "./components/OrganizationHeader";
@@ -14,13 +13,33 @@ const ACTIVE_CAUSE = CAUSES["myanmar-relief"];
 function App() {
   const [amount, setAmount] = useState<string>("1");
   const [infoDrawerOpen, setInfoDrawerOpen] = useState(false);
-  const [addDrawerOpen, setAddDrawerOpen] = useState(false);
   const [shareDrawerOpen, setShareDrawerOpen] = useState(false);
   const [donationComplete, setDonationComplete] = useState(false);
   const [testMode, setTestMode] = useState(false);
+  const [isContextLoading, setIsContextLoading] = useState(true);
+  const [userData, setUserData] = useState<{ fid?: string; username?: string }>({});
 
   useEffect(() => {
-    sdk.actions.ready({ disableNativeGestures: true });
+    async function initializeContext() {
+      try {
+        const context = await sdk.context;
+        const user = context?.user;
+        if (user) {
+          setUserData({
+            fid: user.fid ? String(user.fid) : undefined,
+            username: user.username || undefined,
+          });
+        }
+
+        sdk.actions.ready({ disableNativeGestures: true });
+      } catch (error) {
+        console.error("Error initializing Farcaster context:", error);
+      } finally {
+        setIsContextLoading(false);
+      }
+    }
+
+    initializeContext();
   }, []);
 
   // Test mode effect - simulates payment completion after a short delay
@@ -28,9 +47,22 @@ function App() {
     let timer: number | undefined;
 
     if (testMode) {
-      timer = window.setTimeout(() => {
-        handlePaymentComplete();
-      }, 1500);
+      timer = window.setTimeout(async () => {
+        // Simulate the payment completion
+        setDonationComplete(true);
+
+        // Actually call the addFrame method
+        try {
+          // Prompt user to add frame using native drawer, just like in real flow
+          await sdk.actions.addFrame();
+          // After add drawer is dismissed, show share drawer
+          setShareDrawerOpen(true);
+        } catch (error) {
+          console.error("Error adding frame in test mode:", error);
+          // Show share drawer even if add frame fails
+          setShareDrawerOpen(true);
+        }
+      }, 1000);
     }
 
     return () => {
@@ -46,20 +78,24 @@ function App() {
 
   const openInfoDrawer = () => setInfoDrawerOpen(true);
 
-  const handlePaymentComplete = () => {
+  const handlePaymentComplete = async () => {
     setDonationComplete(true);
-    setAddDrawerOpen(true);
-  };
-
-  const handleAddComplete = () => {
-    setAddDrawerOpen(false);
-    setShareDrawerOpen(true);
+    try {
+      // Prompt user to add frame, which triggers native drawer
+      await sdk.actions.addFrame();
+      // After add drawer is dismissed, show share drawer
+      setShareDrawerOpen(true);
+    } catch (error) {
+      console.error("Error adding frame:", error);
+      // Show share drawer even if add frame fails
+      setShareDrawerOpen(true);
+    }
   };
 
   const handleShareComplete = () => {
     setShareDrawerOpen(false);
     setDonationComplete(false);
-    setTestMode(false); // Reset test mode when flow completes
+    setTestMode(false);
   };
 
   return (
@@ -82,7 +118,9 @@ function App() {
           amount={amount}
           walletAddress={ACTIVE_CAUSE.wallet}
           onPaymentComplete={handlePaymentComplete}
-          disabled={donationComplete}
+          disabled={donationComplete || isContextLoading}
+          metadata={userData}
+          isLoading={isContextLoading}
         />
       </div>
 
@@ -93,7 +131,7 @@ function App() {
           variant="outline"
           size="sm"
           className="w-full text-xs"
-          disabled={testMode || donationComplete}
+          disabled={testMode || donationComplete || isContextLoading}
         >
           Test donation flow
         </Button>
@@ -101,11 +139,8 @@ function App() {
 
       <OrganizationInfo cause={ACTIVE_CAUSE} isOpen={infoDrawerOpen} onOpenChange={setInfoDrawerOpen} />
 
-      <AddDrawer isOpen={addDrawerOpen} onOpenChange={setAddDrawerOpen} onContinue={handleAddComplete} />
-
       <ShareDrawer
         cause={ACTIVE_CAUSE}
-        amount={amount}
         isOpen={shareDrawerOpen}
         onOpenChange={setShareDrawerOpen}
         onComplete={handleShareComplete}
