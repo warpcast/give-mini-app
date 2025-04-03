@@ -61,7 +61,7 @@ function App() {
   };
 
   return (
-    <div className="w-full max-w-sm mx-auto px-0 flex flex-col min-h-[100vh]">
+    <div className="w-full max-w-md mx-auto px-0 flex flex-col min-h-[100vh]">
       <OrganizationHeader cause={ACTIVE_CAUSE} onInfoClick={openInfoDrawer} />
 
       <div className="flex-1 flex flex-col px-4">
