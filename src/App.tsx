@@ -29,12 +29,15 @@ function App() {
       </div>
 
       <div className="flex-1 flex flex-col">
-        <div className="flex-1 flex items-startCan justify-center">
+        <div className="flex items-start justify-center">
           <AmountPicker onChange={handleAmountChange} defaultAmount="1" />
+        </div>
+        <div className="text-center text-muted-foreground text-base py-4 border-t border-border">
+          {ACTIVE_CAUSE.donationDescription}
         </div>
       </div>
 
-      <div className="w-full mt-auto mb-4">
+      <div className="w-full mb-4">
         <DonateButton amount={amount} walletAddress={ACTIVE_CAUSE.wallet} />
       </div>
 

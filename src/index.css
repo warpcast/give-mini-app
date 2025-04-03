@@ -120,6 +120,31 @@
   :root {
     background-color: #ffffff;
     color: #373737;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   }
+}
+
+/* Daimo-style fonts and typography */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "ss01", "ss02", "ss03", "kern";
+}
+
+h1,
+h2,
+h3,
+.font-semibold,
+.font-bold,
+.font-medium {
+  font-weight: 600 !important;
+}
+
+.text-xl,
+.text-2xl {
+  letter-spacing: -0.01em;
+}
+
+button {
+  font-weight: 600 !important;
 }

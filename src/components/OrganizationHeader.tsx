@@ -9,13 +9,13 @@ export function OrganizationHeader({ cause, onInfoClick }: OrganizationHeaderPro
   return (
     <button
       type="button"
-      className="w-full border-b border-border py-4 px-0 flex items-center justify-between text-left focus:outline-none focus:bg-secondary"
+      className="w-full border-b border-border py-4 px-0 flex items-center justify-between text-left focus:outline-none cursor-pointer"
       onClick={onInfoClick}
       aria-label={`View more information about ${cause.name}`}
     >
       <div className="flex items-center gap-2">
         <div>
-          <h2 className="text-xl font-semibold">{cause.name}</h2>
+          <h2 className="text-2xl font-semibold tracking-tight">{cause.name}</h2>
           <p className="text-base text-muted-foreground">{cause.shortDescription}</p>
         </div>
       </div>

@@ -28,7 +28,7 @@ export function DonateButton({ amount, walletAddress }: DonateButtonProps) {
         return (
           <Button
             onClick={show}
-            className="w-full h-14 text-lg font-semibold rounded-2xl bg-primary hover:bg-primary/90"
+            className="w-full h-14 text-lg font-semibold tracking-tight rounded-2xl bg-primary hover:bg-primary/90 cursor-pointer"
             disabled={isAmountZero}
           >
             Give

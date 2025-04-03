@@ -5,6 +5,7 @@ export const CAUSES: CauseCollection = {
     id: "myanmar-relief",
     name: "Myanmar Blockchain Relief",
     shortDescription: "Earthquake Relief Fund",
+    donationDescription: "Your donation supports critical earthquake rescue and relief efforts in Myanmar.",
     mission: "Supporting communities affected by the unprecedented 7.7 magnitude earthquake in Myanmar.",
     impact:
       "Providing urgent relief for impacted regions in Myanmar, including Mandalay, Sagaing, Naypyidaw, and Magway.",

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { TokensSupported } from "./TokensSupported";
 import { Button } from "./ui/button";
 
 interface AmountPickerProps {
@@ -82,7 +83,7 @@ export function AmountPicker({ onChange, defaultAmount = "1", maxAmount = MAX_AM
               inputMode="decimal"
               value={displayValue}
               onChange={handleInputChange}
-              className="font-bold bg-transparent border-none focus:outline-none focus:ring-0 p-0"
+              className="font-bold bg-transparent border-none focus:outline-none focus:ring-0 p-0 cursor-pointer"
               style={{
                 caretColor: "var(--primary)",
                 width: `${Math.max(displayLength * 0.7, 1)}em`,
@@ -91,7 +92,7 @@ export function AmountPicker({ onChange, defaultAmount = "1", maxAmount = MAX_AM
             />
           </div>
         </div>
-        <div className="text-sm text-gray-500">USD</div>
+        <div className="text-base text-gray-500">USD</div>
       </div>
 
       <div className="grid grid-cols-4 gap-3 w-full max-w-sm">
@@ -100,12 +101,14 @@ export function AmountPicker({ onChange, defaultAmount = "1", maxAmount = MAX_AM
             key={preset.value}
             onClick={() => handleAmountSelect(preset.value)}
             variant="outline"
-            className="h-14 text-base font-medium rounded-2xl bg-secondary border-border hover:bg-secondary/80"
+            className="h-14 text-base font-semibold rounded-2xl bg-secondary border-border hover:bg-secondary/80"
           >
             {preset.label}
           </Button>
         ))}
       </div>
+
+      <TokensSupported />
     </div>
   );
 }
