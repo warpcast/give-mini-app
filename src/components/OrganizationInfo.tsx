@@ -13,7 +13,7 @@ export function OrganizationInfo({ cause, isOpen, onOpenChange }: OrganizationIn
     <Drawer open={isOpen} onOpenChange={onOpenChange}>
       <DrawerContent className="px-0 pb-16">
         <DrawerHeader className="border-b border-border px-6 text-left mb-4">
-          <DrawerTitle className="text-left text-2xl font-semibold tracking-tight">{cause.name}</DrawerTitle>
+          <DrawerTitle className="text-left text-2xl font-semibold tracking-tight">About This Cause</DrawerTitle>
         </DrawerHeader>
         <div className="px-6 space-y-6">
           <div>
