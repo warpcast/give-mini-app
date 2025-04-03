@@ -12,6 +12,7 @@
     "iconUrl": "https://give-frame.vercel.app/icon.png",
     "splashImageUrl": "https://give-frame.vercel.app/splash.png",
     "splashBackgroundColor": "#ffffff",
-    "homeUrl": "https://give-frame.vercel.app/"
+    "homeUrl": "https://give-frame.vercel.app/",
+    "webhookUrl": "https://client.warpcast.com/v1/give-mini-app-webhook"
   }
 }
