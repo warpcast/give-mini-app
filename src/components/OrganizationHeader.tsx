@@ -8,11 +8,13 @@ interface OrganizationHeaderProps {
 export function OrganizationHeader({ cause, onInfoClick }: OrganizationHeaderProps) {
   return (
     <div className="w-full mb-2">
-      <div className="relative w-full min-h-[250px] max-h-[325px] overflow-hidden">
-        {cause.image && <img src={cause.image} alt={`${cause.name} banner`} className="w-full h-full object-cover" />}
+      <div className="relative w-full min-h-[140px] max-h-[40vh] overflow-hidden">
+        {cause.image && (
+          <img src={cause.image} alt={`${cause.name} banner`} className="w-full h-full object-cover object-bottom" />
+        )}
 
         <div
-          className="absolute bottom-0 left-0 right-0 w-full h-[120px]"
+          className="absolute bottom-0 left-0 right-0 w-full h-[140px]"
           style={{
             background: "linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0))",
             maskImage: "linear-gradient(to top, black 20%, transparent 85%)",
@@ -24,7 +26,7 @@ export function OrganizationHeader({ cause, onInfoClick }: OrganizationHeaderPro
 
         <button
           type="button"
-          className="absolute bottom-0 left-0 right-0 w-full px-4 py-4 text-left focus:outline-none cursor-pointer z-10"
+          className="absolute bottom-0 left-0 right-0 w-full px-4 pb-6 pt-4 text-left focus:outline-none cursor-pointer z-10"
           onClick={onInfoClick}
           aria-label={`View more information about ${cause.name}`}
         >

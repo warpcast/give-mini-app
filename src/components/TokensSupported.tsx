@@ -31,7 +31,7 @@ const CHAIN_COLORS = {
 
 export function TokensSupported() {
   return (
-    <div className="flex items-center justify-center mt-2 mb-5">
+    <div className="flex items-center justify-center mt-3 mb-4">
       <div className="flex -space-x-1 mr-2">
         <div className="z-60">
           <ChainLogo

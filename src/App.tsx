@@ -57,21 +57,20 @@ function App() {
 
   const handleShareComplete = () => {
     setShareDrawerOpen(false);
-    setDonationComplete(false);
   };
 
   return (
     <div className="w-full max-w-md mx-auto px-0 flex flex-col h-[100vh] relative">
-      {/* Main content area with auto height adjustment */}
-      <div className="flex flex-col w-full overflow-hidden" style={{ height: "calc(100% - 130px)" }}>
-        {/* Header with adjustable height */}
-        <div className="w-full overflow-hidden">
+      {/* Main content area with flex layout for better space management */}
+      <div className="flex flex-col w-full justify-between overflow-hidden" style={{ height: "calc(100% - 140px)" }}>
+        {/* Header that can shrink to accommodate the AmountPicker */}
+        <div className="w-full flex-shrink-1 z-10 max-h-[45vh]">
           <OrganizationHeader cause={ACTIVE_CAUSE} onInfoClick={openInfoDrawer} />
         </div>
 
-        {/* Amount picker - will maintain its size */}
-        <div className="px-4 flex-shrink-0">
-          <div className="flex items-start justify-center">
+        {/* Amount picker with priority (won't shrink) */}
+        <div className="px-4 flex-shrink-0 flex-grow-1 flex items-center">
+          <div className="flex items-start justify-center w-full">
             <AmountPicker onChange={handleAmountChange} defaultAmount="1" />
           </div>
         </div>

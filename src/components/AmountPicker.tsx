@@ -72,7 +72,7 @@ export function AmountPicker({ onChange, defaultAmount = "1", maxAmount = MAX_AM
 
   return (
     <div className="flex flex-col items-center w-full">
-      <div className="flex flex-col items-center py-2" style={{ minHeight: "100px", height: "min(140px, 15vh)" }}>
+      <div className="flex flex-col items-center mt-4 mb-5" style={{ minHeight: "90px" }}>
         <div className="flex justify-center w-full items-center h-full">
           <div className="flex items-baseline" style={{ fontSize }}>
             <span className="font-medium relative z-10" style={{ marginRight: "0.12em" }}>
