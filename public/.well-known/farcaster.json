@@ -7,7 +7,7 @@
   "frame": {
     "version": "1",
     "name": "Give",
-    "imageUrl": "https://give.warpcast.com/frame.png",
+    "imageUrl": "https://give.warpcast.com/frame-embed.png",
     "buttonTitle": "Give",
     "iconUrl": "https://give.warpcast.com/icon.png",
     "splashImageUrl": "https://give.warpcast.com/splash.png",
