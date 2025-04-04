@@ -9,9 +9,12 @@ export interface Cause {
   website?: string;
   wallet: `0x${string}`;
   shareText?: string;
-  image?: string; // Path to the cause's main header image
-  logo?: string; // Path to the cause's logo image
-  donationNote?: string; // Note about donations (e.g., "100% of donations go to...")
+  image?: string;
+  logo?: string;
+  donationNote?: string;
+  userName?: string;
+  userPfp?: string;
+  userFid?: number;
 }
 
 export type CauseCollection = Record<string, Cause>;

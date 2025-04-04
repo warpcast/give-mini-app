@@ -1,4 +1,5 @@
 import type { Cause } from "@/types";
+import { sdk } from "@farcaster/frame-sdk";
 
 interface OrganizationHeaderProps {
   cause: Cause;
@@ -6,6 +7,16 @@ interface OrganizationHeaderProps {
 }
 
 export function OrganizationHeader({ cause, onInfoClick }: OrganizationHeaderProps) {
+  const handleProfileClick = async (event: React.MouseEvent) => {
+    event.stopPropagation();
+    if (cause.userFid) {
+      try {
+        await sdk.actions.viewProfile({ fid: cause.userFid });
+      } catch (error) {
+        console.error("Error opening profile:", error);
+      }
+    }
+  };
   return (
     <div className="w-full mb-2">
       <div className="relative w-full min-h-[140px] max-h-[40vh] overflow-hidden">
@@ -26,7 +37,7 @@ export function OrganizationHeader({ cause, onInfoClick }: OrganizationHeaderPro
 
         <button
           type="button"
-          className="absolute bottom-0 left-0 right-0 w-full px-4 pb-6 pt-4 text-left focus:outline-none cursor-pointer z-10"
+          className="absolute bottom-0 left-0 right-0 w-full px-4 pb-7 pt-4 text-left focus:outline-none cursor-pointer z-10"
           onClick={onInfoClick}
           aria-label={`View more information about ${cause.name}`}
         >
@@ -56,6 +67,28 @@ export function OrganizationHeader({ cause, onInfoClick }: OrganizationHeaderPro
                   <path d="M12 8h.01" />
                 </svg>
               </div>
+              {cause.userName && (
+                <div className="flex flex-row items-center gap-1 mt-1">
+                  <span className="text-sm text-white/60 font-light">shared by</span>
+                  {cause.userPfp && (
+                    <button
+                      type="button"
+                      onClick={handleProfileClick}
+                      className="flex items-center justify-center p-0 bg-transparent border-0"
+                      aria-label={`View ${cause.userName}'s profile`}
+                    >
+                      <img src={cause.userPfp} alt="" className="h-4 w-4 rounded-full object-cover hover:opacity-80" />
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    className="text-sm text-white/90 hover:underline p-0 bg-transparent border-0"
+                    onClick={handleProfileClick}
+                  >
+                    {cause.userName}
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </button>

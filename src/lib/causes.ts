@@ -16,5 +16,8 @@ export const CAUSES: CauseCollection = {
     image: "/causes/myanmar-relief/image.png",
     logo: "/causes/myanmar-relief/logo.png",
     donationNote: "100% of donations go to rescue and relief efforts in Myanmar.",
+    userName: "0xstark.eth",
+    userPfp: "https://pbs.twimg.com/profile_images/1379563839767777280/bcaVZ7a7_400x400.jpg",
+    userFid: 368,
   },
 };
