@@ -38,7 +38,7 @@ export function DonateButton({
       toToken={getAddress(baseUSDC.token)}
       toAddress={walletAddress}
       onPaymentCompleted={handlePaymentCompleted}
-      paymentOptions={[]}
+      paymentOptions={['Coinbase']}
       metadata={metadata}
       closeOnSuccess
     >
