@@ -7,7 +7,7 @@ import { OrganizationInfo } from "./components/OrganizationInfo";
 import { ShareDrawer } from "./components/ShareDrawer";
 import { CAUSES } from "./lib/causes";
 
-const ACTIVE_CAUSE = CAUSES["myanmar-relief"];
+const ACTIVE_CAUSE = CAUSES["roman-storm-defense"];
 
 function App() {
   const [amount, setAmount] = useState<string>("1");
@@ -15,7 +15,9 @@ function App() {
   const [shareDrawerOpen, setShareDrawerOpen] = useState(false);
   const [donationComplete, setDonationComplete] = useState(false);
   const [isContextLoading, setIsContextLoading] = useState(true);
-  const [userData, setUserData] = useState<{ fid?: string; username?: string }>({});
+  const [userData, setUserData] = useState<{ fid?: string; username?: string }>(
+    {}
+  );
 
   useEffect(() => {
     async function initializeContext() {
@@ -61,14 +63,17 @@ function App() {
 
   return (
     <div className="w-full max-w-md mx-auto px-0 flex flex-col h-[100vh] relative">
-      {/* Main content area with flex layout for better space management */}
-      <div className="flex flex-col w-full justify-between overflow-hidden" style={{ height: "calc(100% - 140px)" }}>
-        {/* Header that can shrink to accommodate the AmountPicker */}
+      <div
+        className="flex flex-col w-full justify-between overflow-hidden"
+        style={{ height: "calc(100% - 140px)" }}
+      >
         <div className="w-full flex-shrink-1 z-10 max-h-[45vh]">
-          <OrganizationHeader cause={ACTIVE_CAUSE} onInfoClick={openInfoDrawer} />
+          <OrganizationHeader
+            cause={ACTIVE_CAUSE}
+            onInfoClick={openInfoDrawer}
+          />
         </div>
 
-        {/* Amount picker with priority (won't shrink) */}
         <div className="px-4 flex-shrink-0 flex-grow-1 flex items-center">
           <div className="flex items-start justify-center w-full">
             <AmountPicker onChange={handleAmountChange} defaultAmount="1" />
@@ -76,7 +81,6 @@ function App() {
         </div>
       </div>
 
-      {/* Fixed bottom area for CTA and note */}
       <div className="fixed bottom-0 left-0 right-0 w-full bg-background pt-2 pb-8">
         <div className="w-full px-4 mb-2 max-w-md mx-auto">
           <DonateButton
@@ -89,10 +93,16 @@ function App() {
           />
         </div>
 
-        <div className="text-center text-xs pt-2 text-text-caption max-w-md mx-auto">{ACTIVE_CAUSE.donationNote}</div>
+        <div className="text-center text-xs pt-2 text-text-caption max-w-md mx-auto">
+          {ACTIVE_CAUSE.donationNote}
+        </div>
       </div>
 
-      <OrganizationInfo cause={ACTIVE_CAUSE} isOpen={infoDrawerOpen} onOpenChange={setInfoDrawerOpen} />
+      <OrganizationInfo
+        cause={ACTIVE_CAUSE}
+        isOpen={infoDrawerOpen}
+        onOpenChange={setInfoDrawerOpen}
+      />
 
       <ShareDrawer
         cause={ACTIVE_CAUSE}
