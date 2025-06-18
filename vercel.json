@@ -1,4 +1,14 @@
 {
+  "rewrites": [
+    {
+      "source": "/causes/myanmar-relief",
+      "destination": "/causes/myanmar-relief.html"
+    },
+    {
+      "source": "/causes/defend-roman-storm",
+      "destination": "/causes/defend-roman-storm.html"
+    }
+  ],
   "headers": [
     {
       "source": "/frame-embed.png",
