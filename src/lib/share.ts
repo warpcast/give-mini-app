@@ -1,4 +1,5 @@
 import type { Cause } from "@/types";
+import { sdk } from "@farcaster/frame-sdk";
 
 export function getShareText(cause: Cause): string {
   if (cause.shareText) {
@@ -8,8 +9,19 @@ export function getShareText(cause: Cause): string {
   return `I just supported ${cause.name}. Join me in making a difference!`;
 }
 
-export function getShareUrl(cause: Cause): string {
-  const text = encodeURIComponent(getShareText(cause));
-  const url = encodeURIComponent(window.location.origin);
-  return `https://warpcast.com/~/compose?text=${text}&embeds[]=${url}`;
+export async function shareCast(cause: Cause): Promise<boolean> {
+  try {
+    const text = getShareText(cause);
+    const url = window.location.href;
+
+    const result = await sdk.actions.composeCast({
+      text: text,
+      embeds: [url],
+    });
+
+    return result !== null;
+  } catch (error) {
+    console.error("Failed to compose cast:", error);
+    return false;
+  }
 }

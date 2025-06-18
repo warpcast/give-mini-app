@@ -1,0 +1,31 @@
+diff --git a/build/index.js b/build/index.js
+index c802f6ce8c3c2527532b29a708670de738ba537e..08a7f88fd229773ccf75ffa8b22b3c537193c716 100644
+--- a/build/index.js
++++ b/build/index.js
+@@ -10479,7 +10479,7 @@ const OptionsList = ({ options, isLoading, requiredSkeletons, scrollHeight = 300
+         return (jsxs(OptionsContainer$1, { "$totalResults": options.length, children: [options.map((option) => (jsx(OptionItem, { option: option }, option.id))), isLoading &&
+                     Array.from({ length: skeletonCount }).map((_, index) => (jsx(SkeletonOptionItem, {}, index)))] }));
+     }
+-    return (jsxs(Fragment, { children: [jsx(ScrollArea, { mobileDirection: "vertical", height: scrollHeight, hideBottomLine: orDivider || hideBottomLine, totalItems: options.length, children: jsx(OptionsContainer$1, { "$totalResults": options.length, children: options.map((option) => (jsx(OptionItem, { option: option }, option.id))) }) }), orDivider && jsx(OrDivider, {})] }));
++    return (jsxs(Fragment, { children: [jsx(ScrollArea, { mobileDirection: "vertical", height: scrollHeight, hideBottomLine: orDivider || hideBottomLine, totalItems: options.length, children: jsx(OptionsContainer$1, { "$totalResults": options.length, children: options.map((option) => (jsx(OptionItem, { option: option }, option.id))) }) }) /* , orDivider && jsx(OrDivider, {}) - Hide for Farcaster mini app */] }));
+ };
+ const SkeletonOptionItem = () => {
+     return (jsxs(OptionButton, { type: "button", children: [jsx(SkeletonIcon, {}), jsx(SkeletonLabel, {})] }));
+@@ -10625,7 +10625,7 @@ function SelectAnotherMethodButton() {
+     }
+     return (jsx(OptionsContainer, { children: jsx(OptionsList, { options: allPaymentOptions.length > 0
+                 ? [selectMethodOption]
+-                : [selectWalletOption] }) }));
++                : [] /* [selectWalletOption] - Hide for Farcaster mini app */ }) }));
+ }
+ 
+ const SelectDepositAddressChain = () => {
+@@ -10813,7 +10813,7 @@ function SelectMethod() {
+     };
+     const options = [];
+     options.push(...connectedWalletOptions);
+-    options.push(unconnectedWalletOption);
++    // options.push(unconnectedWalletOption); // Hide "Pay with another wallet" for Farcaster mini app
+     log(`[SELECT_METHOD] loading: ${externalPaymentOptions.loading}, options: ${JSON.stringify(externalPaymentOptions.options)}`);
+     if (showSolanaPaymentMethod) {
+         const solanaOption = getSolanaOption(isIOS, isAndroid, solanaWallets, disconnectSolana, setRoute);

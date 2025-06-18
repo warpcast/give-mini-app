@@ -7,17 +7,30 @@ import { OrganizationInfo } from "./components/OrganizationInfo";
 import { ShareDrawer } from "./components/ShareDrawer";
 import { CAUSES } from "./lib/causes";
 
-const ACTIVE_CAUSE = CAUSES["roman-storm-defense"];
+const DEFAULT_CAUSE_ID = "myanmar-relief";
+
+// Get cause from data attribute
+const getCauseFromDataAttribute = () => {
+  const rootElement = document.getElementById("root");
+  const causeId = rootElement?.getAttribute("data-cause");
+
+  // Validate that the cause exists
+  if (causeId && CAUSES[causeId]) {
+    return CAUSES[causeId];
+  }
+
+  // Default to Myanmar relief if no valid cause specified
+  return CAUSES[DEFAULT_CAUSE_ID];
+};
 
 function App() {
-  const [amount, setAmount] = useState<string>("1");
+  const [activeCause] = useState(getCauseFromDataAttribute());
+  const [amount, setAmount] = useState<string>("5");
   const [infoDrawerOpen, setInfoDrawerOpen] = useState(false);
   const [shareDrawerOpen, setShareDrawerOpen] = useState(false);
   const [donationComplete, setDonationComplete] = useState(false);
   const [isContextLoading, setIsContextLoading] = useState(true);
-  const [userData, setUserData] = useState<{ fid?: string; username?: string }>(
-    {}
-  );
+  const [userData, setUserData] = useState<{ fid?: string; username?: string }>({});
 
   useEffect(() => {
     async function initializeContext() {
@@ -63,20 +76,14 @@ function App() {
 
   return (
     <div className="w-full max-w-md mx-auto px-0 flex flex-col h-[100vh] relative">
-      <div
-        className="flex flex-col w-full justify-between overflow-hidden"
-        style={{ height: "calc(100% - 140px)" }}
-      >
+      <div className="flex flex-col w-full justify-between overflow-hidden" style={{ height: "calc(100% - 140px)" }}>
         <div className="w-full flex-shrink-1 z-10 max-h-[45vh]">
-          <OrganizationHeader
-            cause={ACTIVE_CAUSE}
-            onInfoClick={openInfoDrawer}
-          />
+          <OrganizationHeader cause={activeCause} onInfoClick={openInfoDrawer} />
         </div>
 
         <div className="px-4 flex-shrink-0 flex-grow-1 flex items-center">
           <div className="flex items-start justify-center w-full">
-            <AmountPicker onChange={handleAmountChange} defaultAmount="1" />
+            <AmountPicker onChange={handleAmountChange} defaultAmount="5" />
           </div>
         </div>
       </div>
@@ -85,27 +92,25 @@ function App() {
         <div className="w-full px-4 mb-2 max-w-md mx-auto">
           <DonateButton
             amount={amount}
-            walletAddress={ACTIVE_CAUSE.wallet}
+            walletAddress={activeCause.wallet}
             onPaymentComplete={handlePaymentComplete}
             disabled={donationComplete || isContextLoading}
-            metadata={userData}
+            metadata={{
+              ...userData,
+              causeId: activeCause.id,
+              causeName: activeCause.name,
+            }}
             isLoading={isContextLoading}
           />
         </div>
 
-        <div className="text-center text-xs pt-2 text-text-caption max-w-md mx-auto">
-          {ACTIVE_CAUSE.donationNote}
-        </div>
+        <div className="text-center text-xs pt-2 text-text-caption max-w-md mx-auto">{activeCause.donationNote}</div>
       </div>
 
-      <OrganizationInfo
-        cause={ACTIVE_CAUSE}
-        isOpen={infoDrawerOpen}
-        onOpenChange={setInfoDrawerOpen}
-      />
+      <OrganizationInfo cause={activeCause} isOpen={infoDrawerOpen} onOpenChange={setInfoDrawerOpen} />
 
       <ShareDrawer
-        cause={ACTIVE_CAUSE}
+        cause={activeCause}
         isOpen={shareDrawerOpen}
         onOpenChange={setShareDrawerOpen}
         onComplete={handleShareComplete}

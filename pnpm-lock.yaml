@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  '@daimo/pay':
+    hash: 2abe8695496af30fa17b0de31355aec033c1edb287e06b1c312ea1e473657ce8
+    path: patches/@daimo__pay.patch
+
 importers:
 
   .:
@@ -13,7 +18,7 @@ importers:
         version: 1.6.0
       '@daimo/pay':
         specifier: ^1.10.2
-        version: 1.10.2(d2e6d643941dfdfda70734f0079b5570)
+        version: 1.10.2(patch_hash=2abe8695496af30fa17b0de31355aec033c1edb287e06b1c312ea1e473657ce8)(d2e6d643941dfdfda70734f0079b5570)
       '@farcaster/frame-sdk':
         specifier: ^0.0.64
         version: 0.0.64(bufferutil@4.0.9)(encoding@0.1.13)(typescript@5.8.3)(utf-8-validate@5.0.10)(zod@3.24.2)
@@ -5725,7 +5730,7 @@ snapshots:
       - typescript
       - utf-8-validate
 
-  '@daimo/pay@1.10.2(d2e6d643941dfdfda70734f0079b5570)':
+  '@daimo/pay@1.10.2(patch_hash=2abe8695496af30fa17b0de31355aec033c1edb287e06b1c312ea1e473657ce8)(d2e6d643941dfdfda70734f0079b5570)':
     dependencies:
       '@daimo/pay-common': 1.10.2(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)
       '@rollup/plugin-typescript': 12.1.2(rollup@4.39.0)(tslib@2.8.1)(typescript@5.8.3)

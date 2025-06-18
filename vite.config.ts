@@ -14,4 +14,13 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+        'myanmar-relief': path.resolve(__dirname, 'causes/myanmar-relief.html'),
+        'defend-roman-storm': path.resolve(__dirname, 'causes/defend-roman-storm.html'),
+      },
+    },
+  },
 });

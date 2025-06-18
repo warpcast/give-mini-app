@@ -1,7 +1,10 @@
 import { Button } from "@/components/ui/button";
+import { useOFACCheck } from "@/hooks/useOFACCheck";
 import { baseUSDC } from "@daimo/contract";
 import { DaimoPayButton } from "@daimo/pay";
+import { useEffect, useRef } from "react";
 import { getAddress } from "viem";
+import { useAccount, useConnect } from "wagmi";
 
 interface DonateButtonProps {
   amount: string;
@@ -20,6 +23,23 @@ export function DonateButton({
   metadata = {},
   isLoading = false,
 }: DonateButtonProps) {
+  const { address: connectedAddress, isConnected } = useAccount();
+  const { connect, connectors } = useConnect();
+  const { isBlocked, isChecking } = useOFACCheck(connectedAddress);
+  const hideModalRef = useRef<(() => void) | null>(null);
+  const previousAddressRef = useRef<string | undefined>(connectedAddress);
+
+  // Close modal and re-run OFAC check when wallet address changes
+  useEffect(() => {
+    if (previousAddressRef.current && previousAddressRef.current !== connectedAddress) {
+      // Wallet address changed, close the modal
+      if (hideModalRef.current) {
+        hideModalRef.current();
+      }
+    }
+    previousAddressRef.current = connectedAddress;
+  }, [connectedAddress]);
+
   const handlePaymentCompleted = (e: unknown) => {
     console.log(e);
     if (onPaymentComplete) {
@@ -27,7 +47,13 @@ export function DonateButton({
     }
   };
 
-  const buttonText = isLoading ? "Loading..." : "Give";
+  const getButtonText = () => {
+    if (isLoading || isChecking) return "Loading...";
+    if (isBlocked) return "Unable to process donation";
+    return "Give";
+  };
+
+  const buttonText = getButtonText();
 
   return (
     <DaimoPayButton.Custom
@@ -42,14 +68,29 @@ export function DonateButton({
       metadata={metadata}
       closeOnSuccess
     >
-      {({ show }) => {
+      {({ show, hide }) => {
+        // Store hide function reference
+        hideModalRef.current = hide;
+
         const amountNumber = Number(amount);
         const isAmountZero = amountNumber === 0;
-        const isDisabled = isAmountZero || disabled;
+        const isDisabled = isAmountZero || disabled || isBlocked || isChecking;
+
+        const handleClick = async () => {
+          if (!isConnected && connectors.length > 0) {
+            try {
+              connect({ connector: connectors[0] });
+            } catch (error) {
+              console.error("Failed to connect wallet:", error);
+              return;
+            }
+          }
+          show();
+        };
 
         return (
           <Button
-            onClick={show}
+            onClick={handleClick}
             className="w-full h-14 text-lg font-semibold tracking-tight rounded-2xl bg-primary hover:bg-primary/90 cursor-pointer"
             disabled={isDisabled}
           >

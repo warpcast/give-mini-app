@@ -1,7 +1,7 @@
 {
   "headers": [
     {
-      "source": "/frame.png",
+      "source": "/frame-embed.png",
       "headers": [
         {
           "key": "Cache-Control",

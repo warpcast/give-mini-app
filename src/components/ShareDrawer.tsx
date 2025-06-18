@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from "@/components/ui/drawer";
-import { getShareText, getShareUrl } from "@/lib/share";
+import { getShareText, shareCast } from "@/lib/share";
 import type { Cause } from "@/types";
-import { sdk } from "@farcaster/frame-sdk";
+import { useState } from "react";
 
 interface ShareDrawerProps {
   cause: Cause;
@@ -12,10 +12,22 @@ interface ShareDrawerProps {
 }
 
 export function ShareDrawer({ cause, isOpen, onOpenChange, onComplete }: ShareDrawerProps) {
-  const handleShareClick = () => {
-    const shareUrl = getShareUrl(cause);
-    sdk.actions.openUrl(shareUrl);
-    onComplete();
+  const [isSharing, setIsSharing] = useState(false);
+
+  const handleShareClick = async () => {
+    setIsSharing(true);
+    try {
+      const success = await shareCast(cause);
+      if (success) {
+        // Cast was posted successfully
+        onComplete();
+      }
+      // If the user cancelled, just reset the sharing state
+    } catch (error) {
+      console.error("Share failed:", error);
+    } finally {
+      setIsSharing(false);
+    }
   };
 
   return (
@@ -33,9 +45,10 @@ export function ShareDrawer({ cause, isOpen, onOpenChange, onComplete }: ShareDr
             </p>
             <Button
               onClick={handleShareClick}
+              disabled={isSharing}
               className="w-full h-14 text-lg font-semibold tracking-tight rounded-2xl bg-primary hover:bg-primary/90 cursor-pointer"
             >
-              Share
+              {isSharing ? "Opening composer..." : "Share"}
             </Button>
             <button
               type="button"

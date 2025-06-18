@@ -1,0 +1,2 @@
+patchedDependencies:
+  '@daimo/pay': patches/@daimo__pay.patch

@@ -20,24 +20,24 @@ export const CAUSES: CauseCollection = {
     userPfp: "https://pbs.twimg.com/profile_images/1379563839767777280/bcaVZ7a7_400x400.jpg",
     userFid: 368,
   },
-  "roman-storm-defense": {
-    id: "roman-storm-defense",
+  "defend-roman-storm": {
+    id: "defend-roman-storm",
     name: "Defend Roman Storm",
     shortDescription: "Legal Defense Fund",
-    donationDescription: "Help defend the right to privacy and the right to publish code!",
-    mission:
-      "Supporting Roman Storm, a Tornado Cash developer facing trial, in defense of open-source development rights.",
-    impact:
-      "Your donation helps defend against what many view as a direct attack on the open-source development space.",
-    use: "Funds are used for legal defense costs, which are approximately $500,000 per month, with a goal of raising $2-3 million.",
-    website: "https://juicebox.money/v2/p/618",
-    wallet: "0x5F19021618AF1cEB5De7Ca112B505F51f813aE18",
-    shareText: "I just donated to defend open-source development rights. Help support Roman Storm's legal defense!",
-    image: "/causes/roman-storm-defense/image.png",
-    logo: "/causes/roman-storm-defense/logo.png",
-    donationNote: "Your donation supports the legal defense of a Tornado Cash developer.",
+    donationDescription: "Legal Defense Fund support for Roman Storm",
+    mission: "Support Roman Storm's legal defense in a precedent-setting case for open source developers and privacy.",
+    impact: "Help protect the right to privacy and freedom to publish open source code.",
+    use: "Your donation directly funds Roman Storm's legal defense team.",
+    website: "https://freeromanstorm.com/",
+    wallet: "0x1d9619E10086FdC1065B114298384aAe3F680CC0",
+    shareText:
+      "I just donated to help support Roman Storm's legal defense fund. Join me in defending the right to privacy and the right to publish code!",
+    image: "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/ce4f18d5-44a7-484b-0b7c-cb7298046200/original",
+    logo: "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/bfa44f3f-ba78-486a-37ba-1f1a596aac00/original",
+    donationNote: "100% of donations support Roman Storm's legal defense.",
     userName: "ethereum",
-    userPfp: "https://wrpcd.net/cdn-cgi/imagedelivery/BXluQx4ige9GuW0Ia56BHw/ffe9865b-c9f4-4fb2-b9ed-f24252c8e800/anim=false,fit=contain,f=auto,w=576",
+    userPfp:
+      "https://wrpcd.net/cdn-cgi/imagedelivery/BXluQx4ige9GuW0Ia56BHw/ffe9865b-c9f4-4fb2-b9ed-f24252c8e800/anim=false,fit=contain,f=auto,w=576",
     userFid: 2301,
   },
 };
