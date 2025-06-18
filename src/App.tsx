@@ -104,7 +104,7 @@ function App() {
           />
         </div>
 
-        <div className="text-center pt-2 max-w-md mx-auto">{activeCause.donationNote}</div>
+        <div className="text-center pt-2 text-sm max-w-md mx-auto">{activeCause.donationNote}</div>
       </div>
 
       <OrganizationInfo cause={activeCause} isOpen={infoDrawerOpen} onOpenChange={setInfoDrawerOpen} />
