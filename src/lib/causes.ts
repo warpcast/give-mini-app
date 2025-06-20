@@ -40,8 +40,8 @@ export const CAUSES: CauseCollection = {
     shareText:
       "I just donated to help support Roman Storm's legal defense fund. Join me in defending the right to privacy and the right to publish code!",
     image:
-      "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/ce4f18d5-44a7-484b-0b7c-cb7298046200/original",
-    logo: "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/bfa44f3f-ba78-486a-37ba-1f1a596aac00/original",
+      "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/dc558779-2a19-4d06-6a04-1015e8632f00/original",
+    logo: "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/0ac44059-bc96-420b-3b4c-7c7fdb109400/original",
     donationNote:
       "The Ethereum Foundation will match up to $750K in donations.",
     userName: "ethereum",
