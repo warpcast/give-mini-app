@@ -5,6 +5,8 @@ import { DonateButton } from "./components/DonateButton";
 import { OrganizationHeader } from "./components/OrganizationHeader";
 import { OrganizationInfo } from "./components/OrganizationInfo";
 import { ShareDrawer } from "./components/ShareDrawer";
+import { TOSDrawer } from "./components/TOSDrawer";
+import { useTOSAcceptance } from "./hooks/useTOSAcceptance";
 import { CAUSES } from "./lib/causes";
 
 const DEFAULT_CAUSE_ID = "myanmar-relief";
@@ -28,9 +30,11 @@ function App() {
   const [amount, setAmount] = useState<string>("5");
   const [infoDrawerOpen, setInfoDrawerOpen] = useState(false);
   const [shareDrawerOpen, setShareDrawerOpen] = useState(false);
+  const [tosDrawerOpen, setTosDrawerOpen] = useState(false);
   const [donationComplete, setDonationComplete] = useState(false);
   const [isContextLoading, setIsContextLoading] = useState(true);
   const [userData, setUserData] = useState<{ fid?: string; username?: string }>({});
+  const { hasAccepted, saveAcceptance } = useTOSAcceptance(userData.fid);
 
   useEffect(() => {
     async function initializeContext() {
@@ -74,6 +78,22 @@ function App() {
     setShareDrawerOpen(false);
   };
 
+  const [pendingDonation, setPendingDonation] = useState(false);
+
+  const handleTOSAccept = () => {
+    saveAcceptance();
+    setTosDrawerOpen(false);
+    setPendingDonation(true);
+  };
+
+  const handleDonateClick = () => {
+    if (!hasAccepted) {
+      setTosDrawerOpen(true);
+      return false;
+    }
+    return true;
+  };
+
   return (
     <div className="w-full max-w-md mx-auto px-0 flex flex-col h-[100vh] relative">
       <div className="flex flex-col w-full justify-between overflow-hidden" style={{ height: "calc(100% - 140px)" }}>
@@ -94,6 +114,7 @@ function App() {
             amount={amount}
             walletAddress={activeCause.wallet}
             onPaymentComplete={handlePaymentComplete}
+            onBeforePayment={handleDonateClick}
             disabled={donationComplete || isContextLoading}
             metadata={{
               ...userData,
@@ -101,6 +122,8 @@ function App() {
               causeName: activeCause.name,
             }}
             isLoading={isContextLoading}
+            shouldOpenModal={pendingDonation}
+            onModalOpened={() => setPendingDonation(false)}
           />
         </div>
 
@@ -115,6 +138,8 @@ function App() {
         onOpenChange={setShareDrawerOpen}
         onComplete={handleShareComplete}
       />
+
+      <TOSDrawer isOpen={tosDrawerOpen} onOpenChange={setTosDrawerOpen} onAccept={handleTOSAccept} />
     </div>
   );
 }

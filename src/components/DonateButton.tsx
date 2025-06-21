@@ -10,23 +10,30 @@ interface DonateButtonProps {
   amount: string;
   walletAddress: `0x${string}`;
   onPaymentComplete?: () => void;
+  onBeforePayment?: () => boolean;
   disabled?: boolean;
   metadata?: Record<string, string>;
   isLoading?: boolean;
+  shouldOpenModal?: boolean;
+  onModalOpened?: () => void;
 }
 
 export function DonateButton({
   amount,
   walletAddress,
   onPaymentComplete,
+  onBeforePayment,
   disabled,
   metadata = {},
   isLoading = false,
+  shouldOpenModal = false,
+  onModalOpened,
 }: DonateButtonProps) {
   const { address: connectedAddress, isConnected } = useAccount();
   const { connect, connectors } = useConnect();
   const { isBlocked, isChecking } = useOFACCheck(connectedAddress);
   const hideModalRef = useRef<(() => void) | null>(null);
+  const showModalRef = useRef<(() => void) | null>(null);
   const previousAddressRef = useRef<string | undefined>(connectedAddress);
 
   // Close modal and re-run OFAC check when wallet address changes
@@ -39,6 +46,16 @@ export function DonateButton({
     }
     previousAddressRef.current = connectedAddress;
   }, [connectedAddress]);
+
+  // Auto-open modal when TOS is accepted
+  useEffect(() => {
+    if (shouldOpenModal && !isBlocked && !isChecking && showModalRef.current) {
+      showModalRef.current();
+      if (onModalOpened) {
+        onModalOpened();
+      }
+    }
+  }, [shouldOpenModal, isBlocked, isChecking, onModalOpened]);
 
   const handlePaymentCompleted = (e: unknown) => {
     console.log(e);
@@ -69,14 +86,20 @@ export function DonateButton({
       closeOnSuccess
     >
       {({ show, hide }) => {
-        // Store hide function reference
+        // Store function references
         hideModalRef.current = hide;
+        showModalRef.current = show;
 
         const amountNumber = Number(amount);
         const isAmountZero = amountNumber === 0;
         const isDisabled = isAmountZero || disabled || isBlocked || isChecking;
 
         const handleClick = async () => {
+          // Check if we should proceed with payment (e.g., TOS check)
+          if (onBeforePayment && !onBeforePayment()) {
+            return;
+          }
+
           if (!isConnected && connectors.length > 0) {
             try {
               connect({ connector: connectors[0] });
