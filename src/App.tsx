@@ -2,31 +2,28 @@ import { sdk } from "@farcaster/frame-sdk";
 import { useEffect, useState } from "react";
 import { AmountPicker } from "./components/AmountPicker";
 import { DonateButton } from "./components/DonateButton";
+import { HomePage } from "./components/HomePage";
 import { OrganizationHeader } from "./components/OrganizationHeader";
 import { OrganizationInfo } from "./components/OrganizationInfo";
 import { ShareDrawer } from "./components/ShareDrawer";
 import { TOSDrawer } from "./components/TOSDrawer";
 import { useTOSAcceptance } from "./hooks/useTOSAcceptance";
 import { CAUSES } from "./lib/causes";
+import type { Cause } from "./types";
 
-const DEFAULT_CAUSE_ID = "myanmar-relief";
-
-// Get cause from data attribute
-const getCauseFromDataAttribute = () => {
+const getCauseFromDataAttribute = (): Cause | null => {
   const rootElement = document.getElementById("root");
   const causeId = rootElement?.getAttribute("data-cause");
 
-  // Validate that the cause exists
   if (causeId && CAUSES[causeId]) {
     return CAUSES[causeId];
   }
 
-  // Default to Myanmar relief if no valid cause specified
-  return CAUSES[DEFAULT_CAUSE_ID];
+  return null;
 };
 
 function App() {
-  const [activeCause] = useState(getCauseFromDataAttribute());
+  const [activeCause, setActiveCause] = useState<Cause | null>(getCauseFromDataAttribute());
   const [amount, setAmount] = useState<string>("5");
   const [infoDrawerOpen, setInfoDrawerOpen] = useState(false);
   const [shareDrawerOpen, setShareDrawerOpen] = useState(false);
@@ -87,6 +84,10 @@ function App() {
   };
 
   const handleDonateClick = () => {
+    if (activeCause?.id === "myanmar-relief") {
+      return true;
+    }
+
     if (!hasAccepted) {
       setTosDrawerOpen(true);
       return false;
@@ -94,6 +95,22 @@ function App() {
     return true;
   };
 
+  const handleCauseSelect = (cause: Cause) => {
+    setActiveCause(cause);
+    if (window.history.pushState) {
+      window.history.pushState(null, "", `/${cause.id}`);
+    }
+  };
+
+  if (!activeCause) {
+    return (
+      <div className="w-full min-h-[100vh] bg-background">
+        <HomePage onCauseSelect={handleCauseSelect} />
+      </div>
+    );
+  }
+
+  // Show cause page
   return (
     <div className="w-full max-w-md mx-auto px-0 flex flex-col h-[100vh] relative">
       <div className="flex flex-col w-full justify-between overflow-hidden" style={{ height: "calc(100% - 140px)" }}>
