@@ -34,9 +34,8 @@ export const CAUSES: CauseCollection = {
       "I just donated to help support Roman Storm's legal defense fund. Join me in defending the right to privacy and the right to publish code!",
     image: "https://imagedelivery.net/BXluQx4ige9GuW0Ia56BHw/897f6f87-1ebb-492b-7c47-f90999b80800/original",
     donationNote: "The Ethereum Foundation will match up to $750K in donations.",
-    userName: "ethereum",
-    userPfp:
-      "https://wrpcd.net/cdn-cgi/imagedelivery/BXluQx4ige9GuW0Ia56BHw/ffe9865b-c9f4-4fb2-b9ed-f24252c8e800/anim=false,fit=contain,f=auto,w=576",
-    userFid: 2301,
+    userName: "0xstark.eth",
+    userPfp: "https://pbs.twimg.com/profile_images/1379563839767777280/bcaVZ7a7_400x400.jpg",
+    userFid: 368,
   },
 };
