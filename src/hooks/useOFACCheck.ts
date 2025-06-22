@@ -30,7 +30,7 @@ export function useOFACCheck(address: string | undefined) {
         setIsBlocked(!data.isGoodAddress);
       } catch (error) {
         console.error("OFAC check failed:", error);
-        setIsBlocked(false);
+        setIsBlocked(true);
       } finally {
         setIsChecking(false);
       }

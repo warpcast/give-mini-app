@@ -36,10 +36,8 @@ export function DonateButton({
   const showModalRef = useRef<(() => void) | null>(null);
   const previousAddressRef = useRef<string | undefined>(connectedAddress);
 
-  // Close modal and re-run OFAC check when wallet address changes
   useEffect(() => {
     if (previousAddressRef.current && previousAddressRef.current !== connectedAddress) {
-      // Wallet address changed, close the modal
       if (hideModalRef.current) {
         hideModalRef.current();
       }
@@ -47,7 +45,6 @@ export function DonateButton({
     previousAddressRef.current = connectedAddress;
   }, [connectedAddress]);
 
-  // Auto-open modal when TOS is accepted
   useEffect(() => {
     if (shouldOpenModal && !isBlocked && !isChecking && showModalRef.current) {
       showModalRef.current();
